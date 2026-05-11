@@ -233,6 +233,14 @@ const categories = Object.keys(menuData);
 export default function Menu() {
   const [active, setActive] = useState(categories[0]);
 
+  const toggleCategory = (cat) => {
+    if (active === cat) {
+      setActive(null);
+    } else {
+      setActive(cat);
+    }
+  };
+
   return (
     <section className="menu-section" id="menu">
       <div className="section-header">
@@ -240,27 +248,32 @@ export default function Menu() {
         <h2 className="section-title">Savor Every Bite</h2>
         <div className="section-divider"></div>
       </div>
-      <div className="menu-tabs">
+      <div className="menu-accordion">
         {categories.map((cat) => (
-          <button key={cat} className={`menu-tab ${active === cat ? "active" : ""}`} onClick={() => setActive(cat)}>
-            {cat}
-          </button>
-        ))}
-      </div>
-      <div className="menu-grid">
-        {menuData[active].map((item, i) => (
-          <div className="menu-card" key={i} style={{ minHeight: item.img ? 'auto' : '100px' }}>
-            {item.img && (
-              <div className="menu-card-img">
-                <img src={item.img} alt={item.name} />
-              </div>
-            )}
-            <div className="menu-card-body" style={{ padding: item.img ? '1.5rem' : '1.5rem 1.5rem 1rem 1.5rem' }}>
-              <h3>{item.name}</h3>
-              {item.desc && <p>{item.desc}</p>}
-              <div className="menu-card-footer" style={{ marginTop: item.desc ? '0' : '1rem' }}>
-                {item.price && <span className="menu-price">₹{item.price}</span>}
-                {item.popular && <span className="menu-badge">🔥 Popular</span>}
+          <div key={cat} className={`accordion-item ${active === cat ? "open" : ""}`}>
+            <button className="accordion-header" onClick={() => toggleCategory(cat)}>
+              <h3>{cat}</h3>
+              <span className="accordion-icon">▼</span>
+            </button>
+            <div className="accordion-content">
+              <div className="menu-grid">
+                {menuData[cat].map((item, i) => (
+                  <div className="menu-card" key={i} style={{ minHeight: item.img ? 'auto' : '100px' }}>
+                    {item.img && (
+                      <div className="menu-card-img">
+                        <img src={item.img} alt={item.name} />
+                      </div>
+                    )}
+                    <div className="menu-card-body" style={{ padding: item.img ? '1.5rem' : '1.5rem 1.5rem 1rem 1.5rem' }}>
+                      <h3>{item.name}</h3>
+                      {item.desc && <p>{item.desc}</p>}
+                      <div className="menu-card-footer" style={{ marginTop: item.desc ? '0' : '1rem' }}>
+                        {item.price && <span className="menu-price">₹{item.price}</span>}
+                        {item.popular && <span className="menu-badge">🔥 Popular</span>}
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
