@@ -19,7 +19,30 @@
 
 * { margin:0; padding:0; box-sizing:border-box; }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: initial;
+}
+
+/* Lenis Boilerplate for smooth scroll optimization */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
 
 body {
   font-family: 'Inter', sans-serif;
@@ -361,7 +384,7 @@ h1,h2,h3,h4,h5 { font-family: 'Playfair Display', serif; }
   0%,100% { box-shadow:0 5px 25px rgba(212,168,67,0.4); }
   50% { box-shadow:0 5px 35px rgba(212,168,67,0.6); }
 }
-.fade-in { opacity:0; transform:translateY(30px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity, transform; }
+.fade-in { opacity:0; transform:translateY(15px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); will-change: opacity, transform; }
 .fade-in.visible { opacity:1; transform:translateY(0); }
 
 /* ===== RESPONSIVE ===== */
